@@ -157,6 +157,10 @@ To collect this information:
 1. Select **Add**. The PingAccess key appears in the table of client secrets, with a random string that autofills in the **VALUE** field.
 1. Next to the PingAccess key's **VALUE** field, select the **Copy to clipboard** icon, then copy and save it. You specify this value later as PingAccess's client secret.
 
+If using a 3rd party certificate instead of a secret, it should be noted that the endpoint used for key verification changes (Notes here https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-protocols-oidc#fetch-the-openid-connect-metadata-document)
+
+If your app has custom signing keys, you must append an appid query parameter containing the app ID in order to get a jwks_uri pointing to your app's signing key information. For example: https://login.microsoftonline.com/{tenant}/.well-known/v2.0/openid-configuration?appid=6731de76-14a6-49ae-97bc-6eba6914391e contains a jwks_uri of https://login.microsoftonline.com/{tenant}/discovery/v2.0/keys?appid=6731de76-14a6-49ae-97bc-6eba6914391e.
+
 ### Update GraphAPI to send custom fields (optional)
 
 If you need a custom claim that sends other tokens within the access_token consumed by PingAccess, set the `acceptMappedClaims` application field to `True`. You can use Graph Explorer or the Azure AD portal's application manifest to make this change.
